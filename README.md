@@ -63,19 +63,30 @@ The app is designed for **simplicity** — no complicated steps, just open the a
 
 ## 📁 **Project Structure**  
 
-house_rent/
+House-Rent-App/
 │
-├── app/
-├── res/
-├── AndroidManifest.xml
-├── build.gradle
-└── README.md
+├── app/ # Main application module
+│ ├── src/
+│ │ ├── main/
+│ │ │ ├── java/ # App source code (activities, adapters, models)
+│ │ │ ├── res/ # Layouts, drawables, values
+│ │ │ │ ├── layout/ # XML UI layouts
+│ │ │ │ ├── drawable/ # Images & icons
+│ │ │ │ └── values/ # Colors, strings, styles
+│ │ │ └── AndroidManifest.xml # App configuration
+│ │
+│ └── build.gradle # App-level build config
+│
+├── build.gradle # Project-level build config
+├── gradle/ # Gradle wrapper files
+├── gradlew # Gradle script (Mac/Linux)
+├── gradlew.bat # Gradle script (Windows)
+└── README.md # Project documentation
 
+---
 
-## ⚙️ **Run Locally**  
-
-### 1️⃣ Clone the Repository  
-```bash
+## ⚙️ **Run Locally**
+1️⃣ Clone the Repository
 git clone https://github.com/najmul032/House-Rent-App.git
 cd House-Rent-App
 
@@ -83,16 +94,23 @@ cd House-Rent-App
 Open Android Studio
 Click Open Project
 Select the cloned folder
+
 3️⃣ Run the App
 Connect your Android device OR start an emulator
 Click ▶️ Run button
 
-📦 APK Installation
+## 📦 **APK Installation**
 Download APK from the link below
 Enable “Install from unknown sources”
 Install APK
 Open and use
+👉 ### 🔽 **Download APK**  
+👉 [**Download House Rent APK**](https://github.com/najmul032/House-Rent-App/releases/download/v1.0/app-debug.apk)
 
-🔽 Download APK
+## 📌 **Notes**
+Works best on Android devices
+Make sure permissions are allowed
+Keep app updated
 
-👉 Download House Rent APK
+## 👤 **Author**
+Developed by **Najmul Hassan**
