@@ -79,22 +79,3 @@ house_rent/
 ```bash
 git clone https://github.com/najmul032/House-Rent-App.git
 cd House-Rent-App
-
-
-Open project in Android Studio
-Connect device or use emulator
-Click ▶️ Run
-📦 APK Installation
-Download APK from the link below
-Enable “Install from unknown sources”
-Install APK
-Open and use
-🔽 Download APK
-
-👉 Download House Rent APK
-
-📌 Notes
-Works best on Android devices
-Make sure permissions are allowed
-Keep app updated
-👤 Author
