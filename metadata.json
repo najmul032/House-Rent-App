@@ -1,0 +1,5 @@
+{
+  "name": "House Rent",
+  "description": "A comprehensive app for landlords to manage houses, rooms, tenants, rent collection, expenses, and financial reports.",
+  "requestFramePermissions": []
+}

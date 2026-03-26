@@ -1,0 +1,86 @@
+{
+  "entities": {
+    "House": {
+      "title": "House",
+      "description": "A property managed by the landlord.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "The name of the house." },
+        "location": { "type": "string", "description": "The physical address or location." },
+        "totalRooms": { "type": "number", "description": "Total number of rooms in the house." },
+        "notes": { "type": "string", "description": "Optional notes about the house." },
+        "ownerUid": { "type": "string", "description": "The UID of the landlord who owns this house." },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "ownerUid", "createdAt"]
+    },
+    "Room": {
+      "title": "Room",
+      "description": "A specific room within a house.",
+      "type": "object",
+      "properties": {
+        "houseId": { "type": "string", "description": "The ID of the house this room belongs to." },
+        "roomNumber": { "type": "string", "description": "The identifier for the room (e.g., Room 101)." },
+        "status": { "type": "string", "enum": ["Occupied", "Vacant"], "description": "Current occupancy status." },
+        "ownerUid": { "type": "string", "description": "The UID of the landlord." },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["houseId", "roomNumber", "status", "ownerUid", "createdAt"]
+    },
+    "Tenant": {
+      "title": "Tenant",
+      "description": "A person renting a room.",
+      "type": "object",
+      "properties": {
+        "roomId": { "type": "string", "description": "The ID of the room the tenant is in." },
+        "houseId": { "type": "string", "description": "The ID of the house the tenant is in." },
+        "name": { "type": "string", "description": "Full name of the tenant." },
+        "phoneNumber": { "type": "string", "description": "Contact phone number." },
+        "monthlyRent": { "type": "number", "description": "Agreed monthly rent amount." },
+        "moveInDate": { "type": "string", "format": "date", "description": "The date the tenant moved in." },
+        "ownerUid": { "type": "string", "description": "The UID of the landlord." },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["roomId", "houseId", "name", "monthlyRent", "ownerUid", "createdAt"]
+    },
+    "Payment": {
+      "title": "Payment",
+      "description": "A rent payment record.",
+      "type": "object",
+      "properties": {
+        "tenantId": { "type": "string", "description": "The ID of the tenant making the payment." },
+        "roomId": { "type": "string", "description": "The ID of the room." },
+        "houseId": { "type": "string", "description": "The ID of the house." },
+        "month": { "type": "string", "description": "The month the payment is for (e.g., '2023-10')." },
+        "amountPaid": { "type": "number", "description": "The amount paid in this transaction." },
+        "dueAmount": { "type": "number", "description": "The remaining due amount for this month." },
+        "paymentDate": { "type": "string", "format": "date-time", "description": "When the payment was made." },
+        "ownerUid": { "type": "string", "description": "The UID of the landlord." },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["tenantId", "month", "amountPaid", "ownerUid", "createdAt"]
+    },
+    "Expense": {
+      "title": "Expense",
+      "description": "An expense related to a house.",
+      "type": "object",
+      "properties": {
+        "houseId": { "type": "string", "description": "The ID of the house." },
+        "amount": { "type": "number", "description": "The expense amount." },
+        "category": { "type": "string", "description": "Category (Repair, Utility, Maintenance, etc.)." },
+        "date": { "type": "string", "format": "date", "description": "When the expense occurred." },
+        "notes": { "type": "string", "description": "Optional notes." },
+        "ownerUid": { "type": "string", "description": "The UID of the landlord." },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["houseId", "amount", "category", "date", "ownerUid", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/houses": { "schema": "House", "description": "Collection of houses." },
+    "/rooms": { "schema": "Room", "description": "Collection of rooms." },
+    "/tenants": { "schema": "Tenant", "description": "Collection of tenants." },
+    "/payments": { "schema": "Payment", "description": "Collection of rent payments." },
+    "/expenses": { "schema": "Expense", "description": "Collection of house expenses." }
+  }
+}

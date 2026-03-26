@@ -1,0 +1,77 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    function isDocOwner() {
+      return isAuthenticated() && request.auth.uid == resource.data.ownerUid;
+    }
+    function isNewDocOwner() {
+      return isAuthenticated() && request.auth.uid == request.resource.data.ownerUid;
+    }
+
+    // Validation helpers
+    function isValidHouse(data) {
+      return data.name is string && data.name.size() > 0 && data.name.size() < 100 &&
+             data.ownerUid == request.auth.uid;
+    }
+    function isValidRoom(data) {
+      return data.roomNumber is string && data.roomNumber.size() > 0 &&
+             data.status in ['Occupied', 'Vacant'] &&
+             data.ownerUid == request.auth.uid;
+    }
+    function isValidTenant(data) {
+      return data.name is string && data.name.size() > 0 &&
+             data.monthlyRent is number && data.monthlyRent >= 0 &&
+             data.ownerUid == request.auth.uid;
+    }
+    function isValidPayment(data) {
+      return data.amountPaid is number && data.amountPaid >= 0 &&
+             data.ownerUid == request.auth.uid;
+    }
+    function isValidExpense(data) {
+      return data.amount is number && data.amount >= 0 &&
+             data.ownerUid == request.auth.uid;
+    }
+
+    match /houses/{houseId} {
+      allow read: if isDocOwner();
+      allow create: if isNewDocOwner() && isValidHouse(request.resource.data);
+      allow update: if isDocOwner() && isValidHouse(request.resource.data);
+      allow delete: if isDocOwner();
+    }
+
+    match /rooms/{roomId} {
+      allow read: if isDocOwner();
+      allow create: if isNewDocOwner() && isValidRoom(request.resource.data);
+      allow update: if isDocOwner() && isValidRoom(request.resource.data);
+      allow delete: if isDocOwner();
+    }
+
+    match /tenants/{tenantId} {
+      allow read: if isDocOwner();
+      allow create: if isNewDocOwner() && isValidTenant(request.resource.data);
+      allow update: if isDocOwner() && isValidTenant(request.resource.data);
+      allow delete: if isDocOwner();
+    }
+
+    match /payments/{paymentId} {
+      allow read: if isDocOwner();
+      allow create: if isNewDocOwner() && isValidPayment(request.resource.data);
+      allow update: if isDocOwner() && isValidPayment(request.resource.data);
+      allow delete: if isDocOwner();
+    }
+
+    match /expenses/{expenseId} {
+      allow read: if isDocOwner();
+      allow create: if isNewDocOwner() && isValidExpense(request.resource.data);
+      allow update: if isDocOwner() && isValidExpense(request.resource.data);
+      allow delete: if isDocOwner();
+    }
+  }
+}
