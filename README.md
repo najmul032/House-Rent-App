@@ -63,7 +63,6 @@ The app is designed for **simplicity** — no complicated steps, just open the a
 
 ## 📁 **Project Structure**  
 
-
 house_rent/
 │
 ├── app/
@@ -81,6 +80,7 @@ house_rent/
 git clone https://github.com/najmul032/House-Rent-App.git
 cd House-Rent-App
 
+
 Open project in Android Studio
 Connect device or use emulator
 Click ▶️ Run
@@ -97,6 +97,4 @@ Open and use
 Works best on Android devices
 Make sure permissions are allowed
 Keep app updated
-
 👤 Author
-Developed by Najmul Hassan
